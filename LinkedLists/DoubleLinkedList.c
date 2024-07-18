@@ -1,25 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct list
-{
-    int data;
-    struct list *pPrev;
-    struct list *pNext;
-} node;
-node *pHead;
-node *pLast;
-int size = 0;
-
-int insertNode(int, int);
-void addHeadNode(int);
-void addLastNode(int);
-void printList();
-int deleteNode(int);
-void reverseList();
-void swapNode(int, int);
-node *findNode(int);
-
+#include "DoubleLinkedList.h"
 // Task: Delete function and swap function
 // int deleteNode(int index) ==>> you can make it return the reterned data
 // int swapNode(int indexFirst, int indexSecond) ==>> the return is the error code : 1 for swap was made and 0 for swap wasn't made

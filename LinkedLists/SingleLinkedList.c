@@ -1,16 +1,4 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <math.h>
-
-typedef struct list
-{
-    int data;
-    struct list *pNext;
-} node;
-node *pHead;
-node *pTail;
-int size = 0;
+#include "SingleLinkedList.h"
 
 node *createNode(int data)
 {
@@ -40,7 +28,7 @@ void pushFront(int data)
         pHead = pNode;
     }
 }
-void pushback(int data)
+void pushBack(int data)
 {
     node *pNode = createNode(data);
     if (pHead == NULL)
