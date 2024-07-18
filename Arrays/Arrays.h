@@ -1,3 +1,6 @@
+#if !defined(Arrays)
+#define Arrays
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -17,3 +20,5 @@ int findElement(int, int, int *);
 void removeAllEqual(int, int *);
 
 int size = 0, capacity = 0, call = 1;
+
+#endif // Arrays

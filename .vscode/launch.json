@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "e:/GitHub/LearningDataStrctureAlgorithms/Arrays",
-      "program": "e:/GitHub/LearningDataStrctureAlgorithms/Arrays/build/Debug/outDebug",
+      "cwd": "e:/GitHub/LearningDataStrctureAlgorithms/Queue_LinkedList",
+      "program": "e:/GitHub/LearningDataStrctureAlgorithms/Queue_LinkedList/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

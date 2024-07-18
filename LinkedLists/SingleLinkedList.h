@@ -1,3 +1,6 @@
+#if !defined(SingleLinkedList)
+#define SingleLinkedList
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -11,3 +14,5 @@ typedef struct list
 node *pHead;
 node *pTail;
 int size = 0;
+
+#endif // SingleLinkedList
