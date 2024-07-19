@@ -1,14 +1,33 @@
 #include "Queue.h"
 
+int main()
+{
+    enqueue(1);
+    enqueue(2);
+    enqueue(3);
+    enqueue(4);
+    enqueue(5);
+    enqueue(6);
+    enqueue(7);
+    dequeue();
+    dequeue();
+    dequeue();
+    dequeue();
+    dequeue();
+    dequeue();
+    dequeue();
+    printQueue();
+    return 0;
+}
+
 node *createNode(int data)
 {
-    node *newNode = (node *)calloc(1, sizeof(node *));
+    node *newNode = (node *)malloc(sizeof(node *));
 
     if (newNode != NULL)
     {
         newNode->data = data;
         newNode->pNext = NULL;
-        newNode->pPrev = NULL;
         return newNode;
     }
     printf("Memmory Allocation Failed!\n");
@@ -18,34 +37,39 @@ node *createNode(int data)
 void enqueue(int data)
 {
     node *newNode = createNode(data);
-    if (pHead == NULL)
+    if (newNode != NULL)
     {
-        pHead = pLast = newNode;
+        if (pHead == NULL)
+        {
+            pHead = pLast = newNode;
+            return;
+        }
+        pLast->pNext = newNode;
+        pLast = newNode;
         return;
     }
-    pLast->pNext = newNode;
-    pLast = newNode;
-    return;
 }
 int dequeue()
 {
-    if (isempty())
+    if (pHead == NULL)
     {
         printf("can't dequeue, the Queue is empty");
-        return;
+        return -1;
     }
+    int data = pHead->data;
     node *temp = pHead;
     pHead = pHead->pNext;
     free(temp);
-    return temp->data;
+    if (pHead == NULL)
+    {
+        pLast = NULL;
+        printf("The Queue is now empty and ");
+    }
+    printf("The dequeued data = %d\n", data);
+    return data;
 }
 
-bool isempty()
-{
-    return pHead == NULL;
-}
-
-void print_debug()
+void printQueue()
 {
     printf("Queue contents: ");
 
@@ -58,18 +82,4 @@ void print_debug()
     }
 
     printf("\n");
-}
-
-void destroy_queue()
-{
-
-    node *current = pHead;
-    node *temp = current;
-
-    while (current)
-    {
-        temp = current;
-        current = current->pNext;
-        free(temp);
-    }
 }

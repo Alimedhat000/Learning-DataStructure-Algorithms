@@ -5,11 +5,11 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct Queue
+typedef struct List
 {
     int data;
-    struct list *pNext;
-    struct list *pPrev;
+    struct List *pNext;
+
 } node;
 node *pHead;
 node *pLast;
@@ -17,7 +17,6 @@ node *pLast;
 void enqueue(int);
 node *createNode(int);
 int dequeue();
-bool isempty();
-void print_debug();
+void printQueue();
 
 #endif // Queue
