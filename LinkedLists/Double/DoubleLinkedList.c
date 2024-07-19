@@ -1,22 +1,21 @@
 #include "DoubleLinkedList.h"
-// Task: Delete function and swap function
-// int deleteNode(int index) ==>> you can make it return the reterned data
-// int swapNode(int indexFirst, int indexSecond) ==>> the return is the error code : 1 for swap was made and 0 for swap wasn't made
 
 int main()
 {
-
+    addHeadNode(6);
+    addHeadNode(6);
+    addHeadNode(6);
+    addHeadNode(6);
     addHeadNode(4);
     addHeadNode(3);
     addHeadNode(2);
     addHeadNode(1);
     addHeadNode(0);
     insertNode(5, 5);
+
     printList();
     printf("##############################\n");
-    printf("Deleted data == %d\n", deleteNode(0));
-    printf("##############################\n");
-    swapNode(1, 2);
+    reverseList();
 
     printList();
     return 0;
