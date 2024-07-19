@@ -2,9 +2,7 @@
 
 int main()
 {
-    addHeadNode(6);
-    addHeadNode(6);
-    addHeadNode(6);
+
     addHeadNode(6);
     addHeadNode(4);
     addHeadNode(3);
@@ -15,7 +13,7 @@ int main()
 
     printList();
     printf("##############################\n");
-    reverseList();
+    deleteNode(6);
 
     printList();
     return 0;
@@ -117,13 +115,18 @@ node *findNode(int index)
 
 int deleteNode(int index)
 {
-    node *ptemp;
+    if (index > size || index < 0)
+    {
+        printf("index out of range\n");
+        exit(0);
+    }
     if (index == 0)
     {
-        ptemp = pHead;
         pHead = pHead->pNext;
         size--;
-        return ptemp->data;
+        int data = pHead->pPrev->data;
+        free(pHead->pPrev);
+        return data;
     }
     node *pCurrent = createNode(0);
     pCurrent = pHead;
@@ -131,18 +134,19 @@ int deleteNode(int index)
     {
         pCurrent = pCurrent->pNext;
     }
-    if (pCurrent == NULL)
+    if (pCurrent->pNext == NULL)
     {
-        ptemp = pLast;
         pLast = pLast->pPrev;
+        int data = pLast->pNext->data;
         size--;
-        return pLast->data;
+        return data;
     }
-    ptemp = pCurrent;
+    int data = pCurrent->data;
     pCurrent->pNext->pPrev = pCurrent->pPrev;
     pCurrent->pPrev->pNext = pCurrent->pNext;
     size--;
-    return ptemp->data;
+    free(pCurrent);
+    return data;
 }
 
 void swapNode(int first, int second)
@@ -171,13 +175,13 @@ void swapNode(int first, int second)
     {
         // update pointers going into first and second
 
-        if (pFirstPrev != NULL)
+        if (pFirstPrev != NULL) // if not head
             pFirstPrev->pNext = pSecond;
-        if (pFirstNext != NULL)
+        if (pFirstNext != NULL) // if not last
             pFirstNext->pPrev = pSecond;
-        if (pSecondPrev != NULL)
+        if (pSecondPrev != NULL) // if not head
             pSecondPrev->pNext = pFirst;
-        if (pSecondNext != NULL)
+        if (pSecondNext != NULL) // if not last
             pSecondNext->pPrev = pFirst;
 
         // update pointers going out from first and second
@@ -194,11 +198,11 @@ void swapNode(int first, int second)
         {
 
             // edit pointers going into the two nodes
-            if (pFirstPrev != NULL)
+            if (pFirstPrev != NULL) // if not head
             {
                 pFirstPrev->pNext = pSecond;
             }
-            if (pSecondNext != NULL)
+            if (pSecondNext != NULL) // if not last
             {
                 pSecondNext->pPrev = pFirst;
             }
@@ -215,11 +219,11 @@ void swapNode(int first, int second)
         else // if pSecond Comes first
         {
             // edit pointers going into the two nodes
-            if (pSecondPrev != NULL)
+            if (pSecondPrev != NULL) // if not head
             {
                 pSecondPrev->pNext = pFirst;
             }
-            if (pFirstNext != NULL)
+            if (pFirstNext != NULL) // if not last
             {
                 pFirstNext->pPrev = pSecond;
             }
@@ -239,7 +243,7 @@ void swapNode(int first, int second)
 
     // if pFirst or Pseconed is the Head or tail
     {
-        if (pFirst->pPrev == NULL)
+        if (pFirst->pPrev == NULL) // if node
             pHead = pFirst;
         if (pSecond->pPrev == NULL)
             pHead = pSecond;
