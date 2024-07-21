@@ -131,13 +131,11 @@ void resizeArray(int *arr)
     }
 }
 
-// add alement to the start of the array and move all the elements to the left
 void prepend(int data, int *arr)
 {
     insertElement(data, 0, arr);
 }
 
-// delete element from the end of the array and return it
 int pop(int *arr)
 {
     int temp = arr[size - 1];
@@ -145,7 +143,6 @@ int pop(int *arr)
     return temp;
 }
 
-// swap two items
 void swap(int *a, int *b)
 {
     int temp = *a;
@@ -153,7 +150,6 @@ void swap(int *a, int *b)
     *b = temp;
 }
 
-// Partition function to place the pivot element in its correct position
 int partition(int *arr, int low, int high)
 {
     int pivot = arr[high]; // Choosing the last element as the pivot
@@ -172,7 +168,6 @@ int partition(int *arr, int low, int high)
     return (i + 1);
 }
 
-// Quick Sort function
 void quickSortArray(int *arr, int low, int high)
 {
     if (low < high)
