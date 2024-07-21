@@ -146,3 +146,23 @@ void delete(hash_table *table, char *key)
         }
     }
 }
+
+void destroy(hash_table *table)
+{
+
+    for (int i = 0; i < table->size; i++)
+    {
+        node *pCur = table->data[i];
+        while (pCur != NULL)
+        {
+            node *next = pCur->pNext;
+            free(pCur->key);
+            free(pCur->value);
+            free(pCur);
+            pCur = next;
+        }
+        free(pCur);
+    }
+    free(table->data);
+    free(table);
+}

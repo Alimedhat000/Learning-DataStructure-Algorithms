@@ -41,5 +41,7 @@ node *find(hash_table *table, char *key);
 void printTable(hash_table *table);
 // delete the value specified by key
 void delete(hash_table *table, char *key);
+// destroys the whole table and NULLify all the pointers
+void destroy(hash_table *table);
 
 #endif // HASH_TABLES_PROJECT
