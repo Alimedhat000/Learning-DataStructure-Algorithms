@@ -134,13 +134,13 @@ void heapsort(int *arr, int size)
         temp = arr[0];
         arr[0] = arr[i];
         arr[i] = temp;
-        heapify_array_down(arr, i, 0);
+        heapify_array_down(arr, i, 0); //? We use 'i' as the new size as the right side of the array is sorted
     }
 }
 
 void heapify_array(int *arr, int size)
 {
-    for (int i = size / 2 - 1; i >= 0; i--)
+    for (int i = size / 2 - 1; i >= 0; i--) //? (size/2 -1) as theres only (size / 2) subtrees to be heapified as the leefs has no childs
     {
         heapify_array_down(arr, size, i);
     }
