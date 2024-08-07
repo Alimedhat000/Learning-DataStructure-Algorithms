@@ -71,4 +71,31 @@ Where i implemented a Hashmap with chaining (an array of linked lists) to avoid 
 </details>
 
 ### Trees
+
+Where i implemented a Binary Search Tree 
+<details>
+
+* treeNode *insert(treeNode *node, int data)
+* int getNodeCount(treeNode *node)
+* bool searchInTree(treeNode *node, int data)
+* int getHeight(treeNode *node)
+* bool isValidBST(treeNode *node)
+* treeNode *deleteValue(treeNode *node, int value)
+* int getSuccessor(treeNode *node, int value)
+</details>
+
+### Heaps
+
+Where i implemented a max heap (priority queue) using a static array
+<details>
+
+* void insert(max_heap *Q, int value)
+* void heapify_up(max_heap *Q, int i)
+* int get_max(max_heap *heap)
+* int extract_max(max_heap *heap)
+* void heapify_down(max_heap *heap, int parent)
+* void remove_node(max_heap *heap, int i)
+* void heapsort(int *arr, int size)
+</details>
+
 ### Algorithms
