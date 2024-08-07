@@ -22,4 +22,8 @@ void merge_sort(int n, int *arr, int *out);
  */
 void merge(int n1, int *l, int n2, int *r, int *out);
 
+void partition(int *arr, int size);
+
+void quick_sort(int *arr, int size);
+
 #endif // SORT_PROJECT
