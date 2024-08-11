@@ -1,23 +1,37 @@
 #include "Queue.h"
 
-int main()
+// int main()
+// {
+//     queue *test = initQueue();
+//     enqueue(1, test);
+//     enqueue(2, test);
+//     enqueue(3, test);
+//     enqueue(4, test);
+//     enqueue(5, test);
+//     enqueue(6, test);
+//     enqueue(7, test);
+//     printQueue(test);
+//     dequeue(test);
+//     dequeue(test);
+//     dequeue(test);
+//     dequeue(test);
+//     dequeue(test);
+//     dequeue(test);
+//     dequeue(test);
+//     printQueue(test);
+//     return 0;
+// }
+
+queue *initQueue()
 {
-    enqueue(1);
-    enqueue(2);
-    enqueue(3);
-    enqueue(4);
-    enqueue(5);
-    enqueue(6);
-    enqueue(7);
-    dequeue();
-    dequeue();
-    dequeue();
-    dequeue();
-    dequeue();
-    dequeue();
-    dequeue();
-    printQueue();
-    return 0;
+    queue *q = malloc(sizeof(node));
+    if (q != NULL)
+    {
+        q->pHead = q->pLast = NULL;
+
+        return q;
+    }
+    return NULL;
 }
 
 node *createNode(int data)
@@ -32,48 +46,48 @@ node *createNode(int data)
     }
     printf("Memmory Allocation Failed!\n");
     return NULL;
-};
+}
 
-void enqueue(int data)
+void enqueue(int data, queue *q)
 {
     node *newNode = createNode(data);
     if (newNode != NULL)
     {
-        if (pHead == NULL)
+        if (q->pHead == NULL)
         {
-            pHead = pLast = newNode;
+            q->pHead = q->pLast = newNode;
             return;
         }
-        pLast->pNext = newNode;
-        pLast = newNode;
+        q->pLast->pNext = newNode;
+        q->pLast = newNode;
         return;
     }
 }
-int dequeue()
+int dequeue(queue *q)
 {
-    if (pHead == NULL)
+    if (q->pHead == NULL)
     {
         printf("can't dequeue, the Queue is empty");
         return -1;
     }
-    int data = pHead->data;
-    node *temp = pHead;
-    pHead = pHead->pNext;
+    int data = q->pHead->data;
+    node *temp = q->pHead;
+    q->pHead = q->pHead->pNext;
     free(temp);
-    if (pHead == NULL)
+    if (q->pHead == NULL)
     {
-        pLast = NULL;
+        q->pLast = NULL;
         printf("The Queue is now empty and ");
     }
     printf("The dequeued data = %d\n", data);
     return data;
 }
 
-void printQueue()
+void printQueue(queue *q)
 {
     printf("Queue contents: ");
 
-    node *current = pHead;
+    node *current = q->pHead;
 
     while (current)
     {

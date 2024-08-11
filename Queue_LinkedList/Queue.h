@@ -11,12 +11,16 @@ typedef struct List
     struct List *pNext;
 
 } node;
-node *pHead;
-node *pLast;
+typedef struct Queue
+{
+    node *pHead;
+    node *pLast;
+} queue;
 
-void enqueue(int);
+queue *initQueue();
+void enqueue(int, queue *);
 node *createNode(int);
-int dequeue();
-void printQueue();
+int dequeue(queue *);
+void printQueue(queue *);
 
 #endif // Queue
