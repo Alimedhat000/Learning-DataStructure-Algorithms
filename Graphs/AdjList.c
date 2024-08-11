@@ -21,7 +21,7 @@ undirected *init_graph(int v)
 
     return graph;
 }
-void add_edge(undirected *g, int source, int dist)
+void add_edge(undirected *g, int source, int dist, int weight)
 {
     assert(g->nVertices > source);
     assert(g->nVertices > dist);
@@ -37,6 +37,7 @@ void add_edge(undirected *g, int source, int dist)
         assert(g->vertices[source].edges);
     }
     g->vertices[source].edges[g->vertices[source].edgeCount].val = dist;
+    g->vertices[source].edges[g->vertices[source].edgeCount].weight = weight;
     g->vertices[source].edgeCount++;
 
     // check if the list is filled to double the size
@@ -47,6 +48,7 @@ void add_edge(undirected *g, int source, int dist)
         assert(g->vertices[dist].edges);
     }
     g->vertices[dist].edges[g->vertices[dist].edgeCount].val = source;
+    g->vertices[dist].edges[g->vertices[dist].edgeCount].weight = weight;
     g->vertices[dist].edgeCount++;
 
     g->nEdges++;
@@ -130,4 +132,94 @@ void bfs(undirected *g, int v)
     printf("End\n");
     freeQueue(queue);
     free(visited);
+}
+
+void dfs_recursive(undirected *g, int v)
+{
+    bool *visited = (bool *)malloc(g->nVertices * sizeof(bool));
+    assert(visited); // we init a boolian array to determine visited nodes
+
+    for (int i = 0; i < g->nVertices; i++)
+    {
+        visited[i] = false; // init visited
+    }
+    _traversal(g, visited, v);
+    printf("End\n");
+    free(visited);
+}
+
+void _traversal(undirected *g, bool *visited, int v)
+{
+    printf("%d -> ", v);
+    visited[v] = true;
+    for (int i = 0; i < g->vertices[v].edgeCount; i++)
+    {
+        int neighbor = g->vertices[v].edges[i].val;
+        if (!visited[neighbor])
+        {
+            _traversal(g, visited, neighbor);
+        }
+    }
+}
+
+int shortest_path(undirected *g, int source, int dist)
+{
+    int *distance = (int *)malloc(g->nVertices * sizeof(int));
+    assert(distance);
+    bool *visited = (bool *)malloc(g->nVertices * sizeof(bool));
+    assert(visited); // we init a boolian array to determine visited nodes
+
+    for (int i = 0; i < g->nVertices; i++)
+    {
+        distance[i] = INFINTY; // init all distances as infinty
+        visited[i] = false;    // init visited as false
+    }
+
+    distance[source] = 0;
+
+    // Djikstra Loop
+    for (int i = 0; i < g->nVertices - 1; i++)
+    {
+        int current = _minDistance(distance, visited, g->nVertices);
+        if (current == dist)
+        {
+            break;
+        }
+
+        visited[current] = true;
+
+        // loop over all edges of the current vertix
+        for (int j = 0; j < g->vertices[current].edgeCount; j++)
+        {
+            int neighbor = g->vertices[current].edges[j].val;
+            int neighbor_weight = g->vertices[current].edges[j].weight;
+
+            // add the new distance if the neighbor isnt visited and if the current distance isnt infinty and if the new distance is less than the current distance
+            if (!visited[neighbor] && distance[current] != INFINTY &&
+                distance[current] + neighbor_weight < distance[neighbor])
+            {
+                distance[neighbor] = distance[current] + neighbor_weight;
+            }
+        }
+    }
+    int result = distance[dist];
+    free(distance);
+    free(visited);
+    return (result == INFINTY) ? -1 : result;
+}
+
+int _minDistance(int *distance, bool *visited, int nVertices)
+{
+    int min = INFINTY, min_index;
+
+    for (int v = 0; v < nVertices; v++)
+    {
+        if (!visited[v] && distance[v] <= min)
+        {
+            min = distance[v];
+            min_index = v;
+        }
+    }
+
+    return min_index;
 }

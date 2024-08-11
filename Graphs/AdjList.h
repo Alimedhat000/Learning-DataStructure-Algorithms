@@ -8,6 +8,7 @@
 #include <string.h>
 
 #define WIEGHT 1
+#define INFINTY 2147483647
 
 typedef struct edge
 {
@@ -30,8 +31,12 @@ typedef struct graph
 } undirected;
 
 undirected *init_graph(int v);
-void add_edge(undirected *g, int source, int dist);
+void add_edge(undirected *g, int source, int dist, int weight);
 void dfs(undirected *g, int v);
 void bfs(undirected *graph, int v);
-
+void dfs_recursive(undirected *g, int v);
+void _traversal(undirected *g, bool *visited, int v);
+int shortest_path(undirected *graph, int source, int dist);
+int _minDistance(int *distance, bool *visited, int nVertices);
 #endif // ADJACENCY_LIST_PROJECT
+
