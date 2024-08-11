@@ -1,28 +1,28 @@
 #include "Stack.h"
 
-int main()
-{
-    Stack *S = createStack();
+// int main()
+// {
+//     Stack *S = createStack();
 
-    push(9, S);
-    push(7, S);
-    push(5, S);
-    push(2, S);
-    push(2, S);
-    push(1, S);
-    push(3, S);
+//     push(9, S);
+//     push(7, S);
+//     push(5, S);
+//     push(2, S);
+//     push(2, S);
+//     push(1, S);
+//     push(3, S);
 
-    printf("stack before sorting :\n");
-    printStack(S);
+//     printf("stack before sorting :\n");
+//     printStack(S);
 
-    printf("stack after sorting :\n");
-    sortStack(S);
-    printStack(S);
-}
+//     printf("stack after sorting :\n");
+//     sortStack(S);
+//     printStack(S);
+// }
 
 Stack *createStack()
 {
-    Stack *newStack = malloc(sizeof(node));
+    Stack *newStack = malloc(sizeof(Stack));
     if (newStack != NULL)
     {
         newStack->pTop = NULL;
@@ -53,7 +53,6 @@ void push(int data, Stack *S)
     }
     pNode->pNext = S->pTop;
     S->pTop = pNode;
-    return;
 }
 
 int pop(Stack *S)
@@ -94,9 +93,17 @@ int peekStack(Stack *S)
     push(temp, S);
     return temp;
 }
-bool empty(Stack *S)
+
+bool isempty(Stack *S)
 {
     return S->pTop == NULL;
+}
+
+void freeStack(Stack *S) {
+    while (!isEmpty(S)) {
+        pop(S);
+    }
+    free(S);
 }
 
 void sortStack(Stack *S)

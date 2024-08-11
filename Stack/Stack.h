@@ -31,4 +31,6 @@ void sortStack(Stack *);
 // a function that returns the first element value without poping
 int peekStack(Stack *);
 
+void freeStack(Stack *S);
+
 #endif // STACK_HEADERFILE
