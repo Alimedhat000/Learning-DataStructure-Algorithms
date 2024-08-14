@@ -1,6 +1,6 @@
 #include "AdjList.h"
 
-undirected *init_graph(int v)
+undirected *init_u_graph(int v)
 {
     undirected *graph = (undirected *)malloc(1 * sizeof(undirected));
     assert(graph);
@@ -19,7 +19,7 @@ undirected *init_graph(int v)
 
     return graph;
 }
-void add_edge(undirected *g, int source, int dist, int weight)
+void add_u_edge(undirected *g, int source, int dist, int weight)
 {
     assert(g->nVertices > source);
     assert(g->nVertices > dist);
@@ -52,7 +52,7 @@ void add_edge(undirected *g, int source, int dist, int weight)
     g->nEdges++;
 }
 
-void dfs(undirected *g, int v)
+void u_dfs(undirected *g, int v)
 {
     Stack *stack = createStack();
     assert(stack);
@@ -92,7 +92,7 @@ void dfs(undirected *g, int v)
     free(visited);
 }
 
-void bfs(undirected *g, int v)
+void u_bfs(undirected *g, int v)
 {
     queue *q = initQueue();
     assert(q);
@@ -132,7 +132,7 @@ void bfs(undirected *g, int v)
     free(visited);
 }
 
-void dfs_recursive(undirected *g, int v)
+void u_dfs_recursive(undirected *g, int v)
 {
     bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
     assert(visited); // we init a boolian array to determine visited nodes
@@ -141,12 +141,12 @@ void dfs_recursive(undirected *g, int v)
     {
         visited[i] = false; // init visited
     }
-    _traversal(g, visited, v);
+    _u_traversal(g, visited, v);
     printf("End\n");
     free(visited);
 }
 
-void _traversal(undirected *g, bool *visited, int v)
+void _u_traversal(undirected *g, bool *visited, int v)
 {
     printf("%d -> ", v);
     visited[v] = true;
@@ -155,12 +155,12 @@ void _traversal(undirected *g, bool *visited, int v)
         int neighbor = g->vertices[v].edges[i].val;
         if (!visited[neighbor])
         {
-            _traversal(g, visited, neighbor);
+            _u_traversal(g, visited, neighbor);
         }
     }
 }
 
-int shortest_path(undirected *g, int source, int dist)
+int u_shortest_path(undirected *g, int source, int dist)
 {
     int *distance = malloc((size_t)g->nVertices * sizeof(int));
     assert(distance);
@@ -220,4 +220,172 @@ int _minDistance(int *distance, bool *visited, int nVertices)
     }
 
     return min_index;
+}
+
+directed *init_d_graph(int v)
+{
+    directed *graph = (directed *)malloc(1 * sizeof(directed));
+    assert(graph);
+    // intialize number of v
+    graph->nVertices = v;
+    graph->nEdges = 0;
+    // intialize adjacency list
+    graph->vertices = malloc((size_t)v * sizeof(vertex));
+    // intialize each vertix
+    for (int i = 0; i < v; i++)
+    {
+        graph->vertices[i].edgeCount = 0;
+        graph->vertices[i].edgeCapacity = 0;
+        graph->vertices[i].edges = NULL;
+    }
+
+    return graph;
+}
+
+void add_d_edge(directed *g, int source, int dist, int weight)
+{
+    assert(g->nVertices > source);
+    assert(g->nVertices > dist);
+    assert(source >= 0);
+    assert(dist >= 0);
+    assert(source != dist);
+
+    // check if the list is filled to double the size
+    if (g->vertices[source].edgeCapacity == g->vertices[source].edgeCount)
+    {
+        g->vertices[source].edgeCapacity = g->vertices[source].edgeCapacity * 2 + 1;
+        g->vertices[source].edges = realloc(g->vertices[source].edges, (size_t)g->vertices[source].edgeCapacity * (sizeof(edge)));
+        assert(g->vertices[source].edges);
+    }
+    g->vertices[source].edges[g->vertices[source].edgeCount].val = dist;
+    g->vertices[source].edges[g->vertices[source].edgeCount].weight = weight;
+    g->vertices[source].edgeCount++;
+
+    g->nEdges++;
+}
+
+void d_dfs(directed *g, int v)
+{
+    Stack *stack = createStack();
+    assert(stack);
+
+    bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
+    assert(visited); // we init a boolian array to determine visited nodes
+
+    for (int i = 0; i < g->nVertices; i++)
+    {
+        visited[i] = false; // init visited
+    }
+
+    push(v, stack);
+
+    while (!isEmpty(stack))
+    {
+        int cur = pop(stack);
+
+        if (!visited[cur])
+        {
+            printf("%d -> ", cur);
+            visited[cur] = true;
+
+            for (int i = g->vertices[cur].edgeCount - 1; i >= 0; i--)
+            {
+                int neighbor = g->vertices[cur].edges[i].val;
+                if (!visited[neighbor])
+                {
+                    push(neighbor, stack);
+                }
+            }
+        }
+    }
+
+    printf("End\n");
+    freeStack(stack);
+    free(visited);
+}
+
+void d_bfs(directed *g, int v)
+{
+    queue *q = initQueue();
+    assert(q);
+
+    bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
+    assert(visited); // we init a boolian array to determine visited nodes
+
+    for (int i = 0; i < g->nVertices; i++)
+    {
+        visited[i] = false; // init visited
+    }
+
+    enqueue(v, q);
+
+    while (!Q_isEmpty(q))
+    {
+        int cur = dequeue(q);
+
+        if (!visited[cur])
+        {
+            printf("%d -> ", cur);
+            visited[cur] = true;
+
+            for (int i = g->vertices[cur].edgeCount - 1; i >= 0; i--)
+            {
+                int neighbor = g->vertices[cur].edges[i].val;
+                if (!visited[neighbor])
+                {
+                    enqueue(neighbor, q);
+                }
+            }
+        }
+    }
+
+    printf("End\n");
+    freeQueue(q);
+    free(visited);
+}
+
+int d_shortest_path(directed *g, int source, int dist)
+{
+    int *distance = malloc((size_t)g->nVertices * sizeof(int));
+    assert(distance);
+    bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
+    assert(visited); // we init a boolian array to determine visited nodes
+
+    for (int i = 0; i < g->nVertices; i++)
+    {
+        distance[i] = INFINTY; // init all distances as infinty
+        visited[i] = false;    // init visited as false
+    }
+
+    distance[source] = 0;
+
+    // Djikstra Loop
+    for (int i = 0; i < g->nVertices - 1; i++)
+    {
+        int current = _minDistance(distance, visited, g->nVertices);
+        if (current == dist)
+        {
+            break;
+        }
+
+        visited[current] = true;
+
+        // loop over all edges of the current vertix
+        for (int j = 0; j < g->vertices[current].edgeCount; j++)
+        {
+            int neighbor = g->vertices[current].edges[j].val;
+            int neighbor_weight = g->vertices[current].edges[j].weight;
+
+            // add the new distance if the neighbor isnt visited and if the current distance isnt infinty and if the new distance is less than the current distance
+            if (!visited[neighbor] && distance[current] != INFINTY &&
+                distance[current] + neighbor_weight < distance[neighbor])
+            {
+                distance[neighbor] = distance[current] + neighbor_weight;
+            }
+        }
+    }
+    int result = distance[dist];
+    free(distance);
+    free(visited);
+    return (result == INFINTY) ? -1 : result;
 }

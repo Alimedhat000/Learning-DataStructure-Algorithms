@@ -9,35 +9,154 @@
 #include "Stack.h"
 #include "Queue.h"
 
+// Constants for weight and infinity
 #define WIEGHT 1
 #define INFINTY 2147483647
 
+// Definition of an edge in the graph
 typedef struct edge
 {
-    int val;
-    int weight;
+    int val;    // Destination vertex
+    int weight; // Weight of the edge
 } edge;
 
+// Definition of a vertex in the graph
 typedef struct vertex
 {
-    edge *edges;
-    int edgeCount;
-    int edgeCapacity;
+    edge *edges;      // Array of edges (adjacent vertices)
+    int edgeCount;    // Number of edges
+    int edgeCapacity; // Current capacity of the edge array
 } vertex;
 
-typedef struct graph
+// Definition of an undirected graph
+typedef struct undirected
 {
-    vertex *vertices;
-    int nVertices;
-    int nEdges;
+    vertex *vertices; // Array of vertices
+    int nVertices;    // Number of vertices
+    int nEdges;       // Number of edges
 } undirected;
 
-undirected *init_graph(int v);
-void add_edge(undirected *g, int source, int dist, int weight);
-void dfs(undirected *g, int v);
-void bfs(undirected *graph, int v);
-void dfs_recursive(undirected *g, int v);
-void _traversal(undirected *g, bool *visited, int v);
-int shortest_path(undirected *graph, int source, int dist);
+// Definition of a directed graph
+typedef struct directed
+{
+    vertex *vertices; // Array of vertices
+    int nVertices;    // Number of vertices
+    int nEdges;       // Number of edges
+} directed;
+
+/**
+ * Initializes an undirected graph with a given number of vertices.
+ *
+ * @param v Number of vertices in the graph.
+ * @return A pointer to the initialized undirected graph.
+ */
+undirected *init_u_graph(int v);
+
+/**
+ * Adds an edge to an undirected graph.
+ *
+ * @param g Pointer to the undirected graph.
+ * @param source Source vertex of the edge.
+ * @param dist Destination vertex of the edge.
+ * @param weight Weight of the edge.
+ */
+void add_u_edge(undirected *g, int source, int dist, int weight);
+
+/**
+ * Performs a Depth-First Search (DFS) on an undirected graph starting from a given vertex.
+ *
+ * @param g Pointer to the undirected graph.
+ * @param v Starting vertex for the DFS.
+ */
+void u_dfs(undirected *g, int v);
+
+/**
+ * Performs a Breadth-First Search (BFS) on an undirected graph starting from a given vertex.
+ *
+ * @param g Pointer to the undirected graph.
+ * @param v Starting vertex for the BFS.
+ */
+void u_bfs(undirected *g, int v);
+
+/**
+ * Performs a recursive Depth-First Search (DFS) on an undirected graph starting from a given vertex.
+ *
+ * @param g Pointer to the undirected graph.
+ * @param v Starting vertex for the DFS.
+ */
+void u_dfs_recursive(undirected *g, int v);
+
+/**
+ * Helper function for recursive DFS traversal.
+ *
+ * @param g Pointer to the undirected graph.
+ * @param visited Array of visited vertices.
+ * @param v Current vertex being visited.
+ */
+void _u_traversal(undirected *g, bool *visited, int v);
+
+/**
+ * Finds the shortest path in an undirected graph using Dijkstra's algorithm.
+ *
+ * @param g Pointer to the undirected graph.
+ * @param source Source vertex for the shortest path search.
+ * @param dist Destination vertex for the shortest path search.
+ * @return The shortest path distance or -1 if no path exists.
+ */
+int u_shortest_path(undirected *g, int source, int dist);
+
+/**
+ * Helper function to find the vertex with the minimum distance that has not been visited.
+ *
+ * @param distance Array of distances from the source vertex.
+ * @param visited Array of visited vertices.
+ * @param nVertices Number of vertices in the graph.
+ * @return The index of the vertex with the minimum distance.
+ */
 int _minDistance(int *distance, bool *visited, int nVertices);
+
+/**
+ * Initializes a directed graph with a given number of vertices.
+ *
+ * @param v Number of vertices in the graph.
+ * @return A pointer to the initialized directed graph.
+ */
+directed *init_d_graph(int v);
+
+/**
+ * Adds an edge to a directed graph.
+ *
+ * @param g Pointer to the directed graph.
+ * @param source Source vertex of the edge.
+ * @param dist Destination vertex of the edge.
+ * @param weight Weight of the edge.
+ */
+void add_d_edge(directed *g, int source, int dist, int weight);
+
+/**
+ * Performs a Depth-First Search (DFS) on a directed graph starting from a given vertex.
+ *
+ * @param g Pointer to the directed graph.
+ * @param v Starting vertex for the DFS.
+ */
+void d_dfs(directed *g, int v);
+
+/**
+ * Performs a Breadth-First Search (BFS) on a directed graph starting from a given vertex.
+ *
+ * @param g Pointer to the directed graph.
+ * @param v Starting vertex for the BFS.
+ */
+void d_bfs(directed *g, int v);
+
+/**
+ * Finds the shortest path in a directed graph using Dijkstra's algorithm.
+ *
+ * @param g Pointer to the directed graph.
+ * @param source Source vertex for the shortest path search.
+ * @param dist Destination vertex for the shortest path search.
+ * @return The shortest path distance or -1 if no path exists.
+ */
+int d_shortest_path(directed *g, int source, int dist);
+
 #endif // ADJACENCY_LIST_PROJECT
