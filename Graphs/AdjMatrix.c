@@ -1,6 +1,4 @@
 #include "AdjMatrix.h"
-#include "Stack.c"
-#include "Queue.c"
 
 M_undirected *M_init_graph(int v)
 {
@@ -8,12 +6,12 @@ M_undirected *M_init_graph(int v)
     assert(g);
 
     g->nVertices = v + 1;
-    g->AdjMatrix = (int **)malloc((v + 1) * sizeof(int *));
+    g->AdjMatrix = (int **)malloc((size_t)(v + 1) * sizeof(int *));
     assert(g->AdjMatrix);
 
     for (int i = 0; i < v + 1; i++)
     {
-        g->AdjMatrix[i] = (int *)malloc((v + 1) * sizeof(int));
+        g->AdjMatrix[i] = (int *)malloc((size_t)(v + 1) * sizeof(int));
         assert(g->AdjMatrix[i]);
         for (int j = 0; j < v + 1; j++)
         {
@@ -36,7 +34,7 @@ void M_add_edge(M_undirected *g, int source, int dist)
 
 void M_dfs(M_undirected *g, int v)
 {
-    bool *visited = (bool *)malloc(g->nVertices * (sizeof(bool)));
+    bool *visited = (bool *)malloc((size_t)g->nVertices * (sizeof(bool)));
     assert(visited);
     for (int i = 0; i < g->nVertices; i++)
     {
@@ -70,7 +68,7 @@ void M_dfs(M_undirected *g, int v)
 
 void M_bfs(M_undirected *g, int v)
 {
-    bool *visited = (bool *)malloc(g->nVertices * (sizeof(bool)));
+    bool *visited = (bool *)malloc((size_t)g->nVertices * (sizeof(bool)));
     assert(visited);
     for (int i = 0; i < g->nVertices; i++)
     {

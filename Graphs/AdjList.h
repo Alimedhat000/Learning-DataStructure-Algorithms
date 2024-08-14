@@ -6,6 +6,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+#include "Stack.h"
+#include "Queue.h"
 
 #define WIEGHT 1
 #define INFINTY 2147483647
@@ -39,4 +41,3 @@ void _traversal(undirected *g, bool *visited, int v);
 int shortest_path(undirected *graph, int source, int dist);
 int _minDistance(int *distance, bool *visited, int nVertices);
 #endif // ADJACENCY_LIST_PROJECT
-

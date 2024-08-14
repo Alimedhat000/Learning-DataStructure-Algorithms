@@ -1,6 +1,4 @@
 #include "AdjList.h"
-#include "Stack.c"
-#include "Queue.c"
 
 undirected *init_graph(int v)
 {
@@ -10,7 +8,7 @@ undirected *init_graph(int v)
     graph->nVertices = v;
     graph->nEdges = 0;
     // intialize adjacency list
-    graph->vertices = (vertex *)malloc(v * sizeof(vertex));
+    graph->vertices = malloc((size_t)v * sizeof(vertex));
     // intialize each vertix
     for (int i = 0; i < v; i++)
     {
@@ -33,7 +31,7 @@ void add_edge(undirected *g, int source, int dist, int weight)
     if (g->vertices[source].edgeCapacity == g->vertices[source].edgeCount)
     {
         g->vertices[source].edgeCapacity = g->vertices[source].edgeCapacity * 2 + 1;
-        g->vertices[source].edges = realloc(g->vertices[source].edges, g->vertices[source].edgeCapacity * (sizeof(edge)));
+        g->vertices[source].edges = realloc(g->vertices[source].edges, (size_t)g->vertices[source].edgeCapacity * (sizeof(edge)));
         assert(g->vertices[source].edges);
     }
     g->vertices[source].edges[g->vertices[source].edgeCount].val = dist;
@@ -44,7 +42,7 @@ void add_edge(undirected *g, int source, int dist, int weight)
     if (g->vertices[dist].edgeCapacity == g->vertices[dist].edgeCount)
     {
         g->vertices[dist].edgeCapacity = g->vertices[dist].edgeCapacity * 2 + 1;
-        g->vertices[dist].edges = realloc(g->vertices[dist].edges, g->vertices[dist].edgeCapacity * (sizeof(edge)));
+        g->vertices[dist].edges = realloc(g->vertices[dist].edges, (size_t)g->vertices[dist].edgeCapacity * (sizeof(edge)));
         assert(g->vertices[dist].edges);
     }
     g->vertices[dist].edges[g->vertices[dist].edgeCount].val = source;
@@ -59,7 +57,7 @@ void dfs(undirected *g, int v)
     Stack *stack = createStack();
     assert(stack);
 
-    bool *visited = (bool *)malloc(g->nVertices * sizeof(bool));
+    bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
     assert(visited); // we init a boolian array to determine visited nodes
 
     for (int i = 0; i < g->nVertices; i++)
@@ -96,10 +94,10 @@ void dfs(undirected *g, int v)
 
 void bfs(undirected *g, int v)
 {
-    queue *queue = initQueue();
-    assert(queue);
+    queue *q = initQueue();
+    assert(q);
 
-    bool *visited = (bool *)malloc(g->nVertices * sizeof(bool));
+    bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
     assert(visited); // we init a boolian array to determine visited nodes
 
     for (int i = 0; i < g->nVertices; i++)
@@ -107,11 +105,11 @@ void bfs(undirected *g, int v)
         visited[i] = false; // init visited
     }
 
-    enqueue(v, queue);
+    enqueue(v, q);
 
-    while (!Q_isEmpty(queue))
+    while (!Q_isEmpty(q))
     {
-        int cur = dequeue(queue);
+        int cur = dequeue(q);
 
         if (!visited[cur])
         {
@@ -123,20 +121,20 @@ void bfs(undirected *g, int v)
                 int neighbor = g->vertices[cur].edges[i].val;
                 if (!visited[neighbor])
                 {
-                    enqueue(neighbor, queue);
+                    enqueue(neighbor, q);
                 }
             }
         }
     }
 
     printf("End\n");
-    freeQueue(queue);
+    freeQueue(q);
     free(visited);
 }
 
 void dfs_recursive(undirected *g, int v)
 {
-    bool *visited = (bool *)malloc(g->nVertices * sizeof(bool));
+    bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
     assert(visited); // we init a boolian array to determine visited nodes
 
     for (int i = 0; i < g->nVertices; i++)
@@ -164,9 +162,9 @@ void _traversal(undirected *g, bool *visited, int v)
 
 int shortest_path(undirected *g, int source, int dist)
 {
-    int *distance = (int *)malloc(g->nVertices * sizeof(int));
+    int *distance = malloc((size_t)g->nVertices * sizeof(int));
     assert(distance);
-    bool *visited = (bool *)malloc(g->nVertices * sizeof(bool));
+    bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
     assert(visited); // we init a boolian array to determine visited nodes
 
     for (int i = 0; i < g->nVertices; i++)

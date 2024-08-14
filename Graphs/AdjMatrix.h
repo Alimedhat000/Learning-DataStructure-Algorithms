@@ -6,6 +6,9 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+#include "Stack.h"
+#include "Queue.h"
+
 typedef struct AdjMatrix
 {
     int nVertices;

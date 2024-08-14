@@ -3,8 +3,8 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <string.h>
-#include "AdjList.c"
-#include "AdjMatrix.c"
+#include "AdjList.h"
+#include "AdjMatrix.h"
 
 int main()
 {
