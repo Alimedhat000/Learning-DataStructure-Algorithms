@@ -4,16 +4,16 @@ This repository is a result of my deep dive into Data Structures and Algorithms 
 
 ## 📚 Table of Contents
 
-- [Data Structures](#🧩-data-structures)
-  - [Arrays](#📊-arrays)
-  - [Linked Lists](#🔗-linked-lists)
-  - [Queue](#🛤️-queue)
-  - [Stack](#🥞-stack)
-  - [HashMaps](#🌐-hashmaps)
-  - [Trees](#🌳-trees)
-  - [Heaps](#🛠️-heaps)
-  - [Graphs](#🌐-graphs)
-- [Algorithms](#🧠-algorithms)
+- [Data Structures](#-data-structures)
+  - [Arrays](#-arrays)
+  - [Linked Lists](#-linked-lists)
+  - [Queue](#%EF%B8%8F-queue)
+  - [Stack](#-stack)
+  - [HashMaps](#-hashmaps)
+  - [Trees](#-trees)
+  - [Heaps](#%EF%B8%8F-heaps)
+  - [Graphs](#-graphs)
+- [Algorithms](#-algorithms)
 
 ## 🧩 Data Structures
 
