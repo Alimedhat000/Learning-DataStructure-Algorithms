@@ -5,7 +5,7 @@ This repository is a result of my deep dive into Data Structures and Algorithms 
 ## 📚 Table of Contents
 
 - [Data Structures](#-data-structures)
-  - [Arrays](#-arrays)
+  - [Dynamic Arrays](#-dynamic-arrays)
   - [Linked Lists](#-linked-lists)
   - [Queue](#%EF%B8%8F-queue)
   - [Stack](#-stack)
@@ -17,7 +17,7 @@ This repository is a result of my deep dive into Data Structures and Algorithms 
 
 ## 🧩 Data Structures
 
-### 📊 Arrays
+### 📊 Dynamic Arrays
 Implementation of a dynamically sized array that automatically adjusts its size based on the number of elements.
 
 <details>
