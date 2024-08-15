@@ -89,10 +89,10 @@ void test_top_order_simple()
     }
     printf("\n");
 
-    //     For the above graph, a valid topological sort would be one of the following:
-    // 5, 4, 2, 3, 1, 0
-    // 4, 5, 2, 3, 0, 1
-    // 5, 2, 3, 4, 0, 1
+    // Expected Output:
+    //  5, 4, 2, 3, 1, 0
+    //  4, 5, 2, 3, 0, 1
+    //  5, 2, 3, 4, 0, 1
 
     free(ans);
 }
