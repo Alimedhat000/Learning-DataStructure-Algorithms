@@ -127,7 +127,7 @@ Implementation of **Max Heap** and **Min Heap** (priority queues) using a static
 
 ### 🌐 Graphs
 
-Implementation of both **Directed** and **Undirected Graphs** using adjacency lists, along with essential graph algorithms.
+Implementation of both **Directed** and **Undirected Graphs** using adjacency lists, and adjacency Matrix along with essential graph algorithms.
 
 <details>
 <summary>Click to expand operations</summary>
