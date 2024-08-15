@@ -1,23 +1,24 @@
-# Data Structures and Algorithms Training
-This repository is the result of my DSA (Data Structures and Algorithms) training, following the curriculum from [Coding Interview University](https://github.com/jwasham/coding-interview-university). It includes implementations of various data structures and algorithms commonly used in computer science and software engineering.
+# 🚀 Data Structures and Algorithms Training
 
-## Table of Contents
-- [Data Structures](#data-structures)
-  - [Arrays](#arrays)
-  - [Linked Lists](#linked-lists)
-  - [Queue](#queue)
-  - [Stack](#stack)
-  - [HashMaps](#hashmaps)
-  - [Trees](#trees)
-  - [Heaps](#heaps)
-  - [Graphs](#graphs)
-- [Algorithms](#algorithms)
+This repository is a result of my deep dive into Data Structures and Algorithms (DSA), following the curriculum from [Coding Interview University](https://github.com/jwasham/coding-interview-university). It includes comprehensive implementations of fundamental data structures and algorithms.
 
+## 📚 Table of Contents
 
-## Data Structures
+- [Data Structures](#🧩-data-structures)
+  - [Arrays](#📊-arrays)
+  - [Linked Lists](#🔗-linked-lists)
+  - [Queue](#🛤️-queue)
+  - [Stack](#🥞-stack)
+  - [HashMaps](#🌐-hashmaps)
+  - [Trees](#🌳-trees)
+  - [Heaps](#🛠️-heaps)
+  - [Graphs](#🌐-graphs)
+- [Algorithms](#🧠-algorithms)
 
-### Arrays
-Implementation of a dynamically sized array that changes size based on the number of elements.
+## 🧩 Data Structures
+
+### 📊 Arrays
+Implementation of a dynamically sized array that automatically adjusts its size based on the number of elements.
 
 <details>
 <summary>Click to expand operations</summary>
@@ -34,8 +35,8 @@ Implementation of a dynamically sized array that changes size based on the numbe
 - `void removeAllEqual(data, arr)`
 </details>
 
-### Linked Lists
-Implementation of Single, Double, and Ring linked lists.
+### 🔗 Linked Lists
+Implementation of **Single**, **Double**, and **Circular (Ring)** linked lists, each serving different purposes and use cases.
 
 <details>
 <summary>Click to expand operations</summary>
@@ -50,8 +51,8 @@ Implementation of Single, Double, and Ring linked lists.
 - `void printList()`
 </details>
 
-### Queue
-Implementation of a Queue using linked lists.
+### 🛤️ Queue
+Implementation of a **Queue** using linked lists, adhering to the First-In-First-Out (FIFO) principle.
 
 <details>
 <summary>Click to expand operations</summary>
@@ -61,8 +62,8 @@ Implementation of a Queue using linked lists.
 - `int printqueue(index)`
 </details>
 
-### Stack
-Implementation of a Stack using linked lists.
+### 🥞 Stack
+Implementation of a **Stack** using linked lists, operating on the Last-In-First-Out (LIFO) principle.
 
 <details>
 <summary>Click to expand operations</summary>
@@ -74,8 +75,8 @@ Implementation of a Stack using linked lists.
 - `int peekstack()`
 </details>
 
-### HashMaps
-Implementation of a Hashmap with chaining (an array of linked lists) to avoid collisions.
+### 🌐 HashMaps
+Implementation of a **HashMap** with chaining (an array of linked lists) to handle collisions efficiently.
 
 <details>
 <summary>Click to expand operations</summary>
@@ -89,8 +90,8 @@ Implementation of a Hashmap with chaining (an array of linked lists) to avoid co
 - `void destroy(table)`
 </details>
 
-### Trees
-Implementation of a Binary Search Tree.
+### 🌳 Trees
+Implementation of a **Binary Search Tree (BST)**, a tree data structure with nodes that follow the left child < parent < right child rule.
 
 <details>
 <summary>Click to expand operations</summary>
@@ -105,8 +106,9 @@ Implementation of a Binary Search Tree.
 
 </details>
 
-### Heaps
-Implementation of a max heap and a min heap (priority queue) using a static array.
+### 🛠️ Heaps
+
+Implementation of **Max Heap** and **Min Heap** (priority queues) using a static array.
 
 <details>
 
@@ -123,8 +125,9 @@ Implementation of a max heap and a min heap (priority queue) using a static arra
 
 </details>
 
-### Graphs
-Implementation of both directed and undirected graphs using adjacency lists.
+### 🌐 Graphs
+
+Implementation of both **Directed** and **Undirected Graphs** using adjacency lists, along with essential graph algorithms.
 
 <details>
 <summary>Click to expand operations</summary>
@@ -141,9 +144,11 @@ Implementation of both directed and undirected graphs using adjacency lists.
 - `void topologicalSort(Graph* graph)`
 - `bool isCyclic(Graph* graph)`
 - `void stronglyConnectedComponents(Graph* graph)`
+
 </details>
 
 #### Graph Algorithms
+
 - Breadth-First Search (BFS)
 - Depth-First Search (DFS)
 - Dijkstra's Shortest Path
@@ -152,8 +157,14 @@ Implementation of both directed and undirected graphs using adjacency lists.
 - Cycle Detection
 - Strongly Connected Components (Kosaraju's algorithm)
 
-## Algorithms
+## 🧠 Algorithms
+
+Implementation of core algorithms that are widely used in computer science:
 
 - Binary Search
 - Quicksort
 - Mergesort
+
+---
+
+This repository is designed to help reinforce my understanding of DSA and to serve as a reference for others who are on a similar learning journey. Feel free to explore, learn, and contribute!
