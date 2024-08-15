@@ -159,4 +159,34 @@ void d_bfs(directed *g, int v);
  */
 int d_shortest_path(directed *g, int source, int dist);
 
+/**
+ * @brief Performs a topological sort on a directed acyclic graph (DAG).
+ *
+ * This function takes a directed acyclic graph (DAG) as input and returns
+ * an array representing the topological ordering of its vertices.
+ * The function uses a depth-first search (DFS) approach to visit each
+ * vertex and determine the correct order.
+ *
+ * @param g A pointer to the directed graph to be sorted.
+ * @return A pointer to an integer array containing the topological order.
+ *         The caller is responsible for freeing this array after use.
+ */
+int *d_top_sort(directed *g);
+
+/**
+ * @brief Depth-First Search (DFS) helper function for topological sorting.
+ *
+ * This function is a helper for `d_top_sort` that recursively visits
+ * vertices in a depth-first manner. It marks each visited vertex,
+ * and adds it to the result array in reverse topological order.
+ *
+ * @param g A pointer to the directed graph.
+ * @param visited A boolean array to keep track of visited vertices.
+ * @param ans An integer array to store the topological order.
+ * @param ans_index The current index in the result array where the vertex should be placed.
+ * @param cur The current vertex being visited.
+ * @return The updated index for the next vertex to be placed in the result array.
+ */
+int d_top_sort_dfs(directed *g, bool *visited, int *ans, int ans_index, int cur);
+
 #endif // ADJACENCY_LIST_PROJECT

@@ -389,3 +389,44 @@ int d_shortest_path(directed *g, int source, int dist)
     free(visited);
     return (result == INFINTY) ? -1 : result;
 }
+
+int *d_top_sort(directed *g)
+{
+    int N = g->nVertices;
+    bool *visited = malloc((size_t)N * sizeof(bool));
+    assert(visited); // we init a boolian array to determine visited nodes
+
+    for (int i = 0; i < N; i++)
+    {
+        visited[i] = false;
+    }
+
+    int *ans = malloc((size_t)N * sizeof(int));
+    assert(ans);
+    int index = N - 1;
+
+    for (int i = 0; i < N; i++)
+    {
+        if (!visited[i])
+        {
+            index = d_top_sort_dfs(g, visited, ans, index, i);
+        }
+    }
+    free(visited);
+    return ans;
+}
+
+int d_top_sort_dfs(directed *g, bool *visited, int *ans, int ans_index, int cur)
+{
+    visited[cur] = true;
+    edge *edges = g->vertices[cur].edges;
+    for (int i = 0; i < g->vertices[cur].edgeCount; i++)
+    {
+        if (!visited[edges[i].val])
+        {
+            ans_index = d_top_sort_dfs(g, visited, ans, ans_index, edges[i].val);
+        }
+    }
+    ans[ans_index] = cur;
+    return ans_index - 1;
+}
