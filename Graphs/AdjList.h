@@ -8,6 +8,7 @@
 #include <string.h>
 #include "Stack.h"
 #include "Queue.h"
+#include "MinHeap.h"
 
 // Constants for weight and infinity
 #define WIEGHT 1
@@ -61,6 +62,13 @@ undirected *init_u_graph(int v);
  * @param weight Weight of the edge.
  */
 void add_u_edge(undirected *g, int source, int dist, int weight);
+
+/**
+ * Frees the memory allocated for the undirected graph.
+ *
+ * @param g Pointer to the undirected graph to be freed.
+ */
+void free_undirected_graph(undirected *g);
 
 /**
  * Performs a Depth-First Search (DFS) on an undirected graph starting from a given vertex.
@@ -122,6 +130,13 @@ int _minDistance(int *distance, bool *visited, int nVertices);
  * @return A pointer to the initialized directed graph.
  */
 directed *init_d_graph(int v);
+
+/**
+ * Frees the memory allocated for the directed graph.
+ *
+ * @param g Pointer to the directed graph to be freed.
+ */
+void free_directed_graph(directed *g);
 
 /**
  * Adds an edge to a directed graph.
@@ -188,5 +203,12 @@ int *d_top_sort(directed *g);
  * @return The updated index for the next vertex to be placed in the result array.
  */
 int d_top_sort_dfs(directed *g, bool *visited, int *ans, int ans_index, int cur);
+
+/**
+ * Calculates the Minimum Spanning Tree (MST) using Prim's algorithm.
+ *
+ * @param g Pointer to the undirected graph.
+ */
+void prim_MST(undirected *g);
 
 #endif // ADJACENCY_LIST_PROJECT

@@ -9,11 +9,16 @@
 void test1();
 void test_top_order();
 void test_top_order_simple();
+void test_MST();
+void test1_MST();
+void test2_MST();
+void test3_MST();
 
 int main()
 {
-    test_top_order();
-    test_top_order_simple();
+    // test_top_order();
+    // test_top_order_simple();
+    test_MST();
     return 0;
 }
 void test1()
@@ -68,6 +73,7 @@ void test_top_order()
     // 0 1 4 6 2 3 5 7
 
     free(ans);
+    free_directed_graph(g);
 }
 
 void test_top_order_simple()
@@ -95,4 +101,87 @@ void test_top_order_simple()
     //  5, 2, 3, 4, 0, 1
 
     free(ans);
+    free_directed_graph(g);
+}
+
+void test_MST()
+{
+    test1_MST();
+    test2_MST();
+    test3_MST();
+}
+void test1_MST()
+{ // Initialize graph with 8 vertices
+    undirected *g = init_u_graph(8);
+
+    // Add edges with weights
+    add_u_edge(g, 0, 2, 4);
+    add_u_edge(g, 0, 3, 1);
+    add_u_edge(g, 1, 3, 2);
+    add_u_edge(g, 1, 4, 5);
+    add_u_edge(g, 2, 5, 3);
+    add_u_edge(g, 3, 5, 8);
+    add_u_edge(g, 4, 6, 6);
+    add_u_edge(g, 5, 7, 7);
+    add_u_edge(g, 6, 7, 9);
+
+    // Run Prim's algorithm to find MST
+    prim_MST(g);
+
+    // Edge   Weight
+    // 0 - 0   0
+    // 3 - 1   2
+    // 0 - 2   4
+    // 0 - 3   1
+    // 1 - 4   5
+    // 2 - 5   3
+    // 4 - 6   6
+    // 5 - 7   7
+    // Total cost of MST: 28
+
+    free_undirected_graph(g);
+}
+void test2_MST()
+{ // Initialize graph with 5 vertices
+    undirected *g = init_u_graph(5);
+
+    // Add edges with weights
+    add_u_edge(g, 0, 1, 2);
+    add_u_edge(g, 0, 2, 3);
+    add_u_edge(g, 1, 2, 1);
+    add_u_edge(g, 1, 3, 4);
+    add_u_edge(g, 2, 3, 2);
+    add_u_edge(g, 2, 4, 5);
+    add_u_edge(g, 3, 4, 5);
+    add_u_edge(g, 4, 0, 6);
+
+    // Run Prim's algorithm to find MST
+    prim_MST(g);
+    // Total cost of MST: 10
+
+    free_undirected_graph(g);
+}
+
+void test3_MST()
+{ // Initialize graph with 7 vertices
+    undirected *g = init_u_graph(7);
+
+    // Add edges with weights
+    add_u_edge(g, 0, 1, 1);
+    add_u_edge(g, 0, 2, 2);
+    add_u_edge(g, 1, 2, 3);
+    add_u_edge(g, 1, 3, 4);
+    add_u_edge(g, 2, 3, 5);
+    add_u_edge(g, 2, 4, 6);
+    add_u_edge(g, 3, 4, 7);
+    add_u_edge(g, 3, 5, 8);
+    add_u_edge(g, 4, 5, 9);
+    add_u_edge(g, 5, 6, 10);
+    add_u_edge(g, 6, 0, 11);
+
+    // Run Prim's algorithm to find MST
+    prim_MST(g);
+    // Total cost of MST: 31
+
+    free_undirected_graph(g);
 }

@@ -52,6 +52,16 @@ void add_u_edge(undirected *g, int source, int dist, int weight)
     g->nEdges++;
 }
 
+void free_undirected_graph(undirected *g)
+{
+    for (int i = 0; i < g->nVertices; i++)
+    {
+        free(g->vertices[i].edges);
+    }
+    free(g->vertices);
+    free(g);
+}
+
 void u_dfs(undirected *g, int v)
 {
     Stack *stack = createStack();
@@ -242,6 +252,16 @@ directed *init_d_graph(int v)
     return graph;
 }
 
+void free_directed_graph(directed *g)
+{
+    for (int i = 0; i < g->nVertices; i++)
+    {
+        free(g->vertices[i].edges);
+    }
+    free(g->vertices);
+    free(g);
+}
+
 void add_d_edge(directed *g, int source, int dist, int weight)
 {
     assert(g->nVertices > source);
@@ -429,4 +449,78 @@ int d_top_sort_dfs(directed *g, bool *visited, int *ans, int ans_index, int cur)
     }
     ans[ans_index] = cur;
     return ans_index - 1;
+}
+
+void prim_MST(undirected *g)
+{
+    int n = g->nVertices;
+    int *parent = malloc((size_t)n * sizeof(int));
+    assert(parent);
+
+    int *value = malloc((size_t)n * sizeof(int));
+    assert(value);
+
+    bool *inMST = malloc((size_t)n * sizeof(bool));
+    assert(inMST); // we init a boolian array to determine visited nodes
+
+    for (int i = 0; i < n; i++)
+    {
+        value[i] = INT_MAX;
+        parent[i] = -1;
+        inMST[i] = false;
+    }
+
+    min_heap *q = init_min_heap(n);
+    element start;
+    start.value = 0;
+    start.index = 0;
+    parent[0] = 0;
+    value[0] = 0;
+    heap_insert(q, start.value, start.index);
+
+    while (!is_heap_empty(q))
+    {
+        element u = heap_pop(q);
+
+        if (inMST[u.index])
+        {
+            continue;
+        }
+
+        inMST[u.index] = true;
+
+        for (int i = 0; i < g->vertices[u.index].edgeCount; i++)
+        {
+            element v;
+            v.value = g->vertices[u.index].edges[i].weight;
+            v.index = g->vertices[u.index].edges[i].val;
+
+            if (!inMST[v.index] && value[v.index] > v.value)
+            {
+                value[v.index] = v.value;
+                heap_insert(q, v.value, v.index);
+                parent[v.index] = u.index;
+            }
+        }
+    }
+    // Calculate and print the MST and its total cost
+    int total_cost = 0;
+    printf("Edge   Weight\n");
+    for (int i = 0; i < n; i++) // Start from 1 since parent[0] is -1
+    {
+        if (parent[i] != -1)
+        {
+            // Print edge and weight
+            int weight = value[i];
+            printf("%d - %d   %d\n", parent[i], i, weight);
+            total_cost += weight;
+        }
+    }
+    printf("Total cost of MST: %d\n", total_cost);
+
+    // Free dynamically allocated memory
+    free(parent);
+    free(value);
+    free(inMST);
+    free_min_heap(q); // Free the heap
 }
