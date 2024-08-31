@@ -50,15 +50,15 @@ void test1()
 void test_top_order()
 {
     directed *g = init_d_graph(8);
-    add_d_edge(g, 0, 2, WIEGHT);
-    add_d_edge(g, 0, 3, WIEGHT);
-    add_d_edge(g, 1, 3, WIEGHT);
-    add_d_edge(g, 1, 4, WIEGHT);
-    add_d_edge(g, 2, 5, WIEGHT);
-    add_d_edge(g, 3, 5, WIEGHT);
-    add_d_edge(g, 4, 6, WIEGHT);
-    add_d_edge(g, 5, 7, WIEGHT);
-    add_d_edge(g, 6, 7, WIEGHT);
+    add_d_edge(g, 0, 2, WEIGHT);
+    add_d_edge(g, 0, 3, WEIGHT);
+    add_d_edge(g, 1, 3, WEIGHT);
+    add_d_edge(g, 1, 4, WEIGHT);
+    add_d_edge(g, 2, 5, WEIGHT);
+    add_d_edge(g, 3, 5, WEIGHT);
+    add_d_edge(g, 4, 6, WEIGHT);
+    add_d_edge(g, 5, 7, WEIGHT);
+    add_d_edge(g, 6, 7, WEIGHT);
 
     int *ans = d_top_sort(g);
 
@@ -80,12 +80,12 @@ void test_top_order_simple()
 {
     directed *g = init_d_graph(6);
 
-    add_d_edge(g, 5, 2, WIEGHT);
-    add_d_edge(g, 5, 0, WIEGHT);
-    add_d_edge(g, 4, 0, WIEGHT);
-    add_d_edge(g, 4, 1, WIEGHT);
-    add_d_edge(g, 2, 3, WIEGHT);
-    add_d_edge(g, 3, 1, WIEGHT);
+    add_d_edge(g, 5, 2, WEIGHT);
+    add_d_edge(g, 5, 0, WEIGHT);
+    add_d_edge(g, 4, 0, WEIGHT);
+    add_d_edge(g, 4, 1, WEIGHT);
+    add_d_edge(g, 2, 3, WEIGHT);
+    add_d_edge(g, 3, 1, WEIGHT);
 
     int *ans = d_top_sort(g);
 

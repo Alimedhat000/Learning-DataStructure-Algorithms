@@ -11,8 +11,8 @@
 #include "MinHeap.h"
 
 // Constants for weight and infinity
-#define WIEGHT 1
-#define INFINTY 2147483647
+#define WEIGHT 1
+#define INFINITE 2147483647
 
 // Definition of an edge in the graph
 typedef struct edge

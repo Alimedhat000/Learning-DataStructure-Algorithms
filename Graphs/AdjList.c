@@ -4,12 +4,12 @@ undirected *init_u_graph(int v)
 {
     undirected *graph = (undirected *)malloc(1 * sizeof(undirected));
     assert(graph);
-    // intialize number of v
+    // initialize number of v
     graph->nVertices = v;
     graph->nEdges = 0;
-    // intialize adjacency list
+    // initialize adjacency list
     graph->vertices = malloc((size_t)v * sizeof(vertex));
-    // intialize each vertix
+    // initialize each vertex
     for (int i = 0; i < v; i++)
     {
         graph->vertices[i].edgeCount = 0;
@@ -68,7 +68,7 @@ void u_dfs(undirected *g, int v)
     assert(stack);
 
     bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
-    assert(visited); // we init a boolian array to determine visited nodes
+    assert(visited); // we init a boolean array to determine visited nodes
 
     for (int i = 0; i < g->nVertices; i++)
     {
@@ -108,7 +108,7 @@ void u_bfs(undirected *g, int v)
     assert(q);
 
     bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
-    assert(visited); // we init a boolian array to determine visited nodes
+    assert(visited); // we init a boolean array to determine visited nodes
 
     for (int i = 0; i < g->nVertices; i++)
     {
@@ -145,7 +145,7 @@ void u_bfs(undirected *g, int v)
 void u_dfs_recursive(undirected *g, int v)
 {
     bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
-    assert(visited); // we init a boolian array to determine visited nodes
+    assert(visited); // we init a boolean array to determine visited nodes
 
     for (int i = 0; i < g->nVertices; i++)
     {
@@ -175,17 +175,17 @@ int u_shortest_path(undirected *g, int source, int dist)
     int *distance = malloc((size_t)g->nVertices * sizeof(int));
     assert(distance);
     bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
-    assert(visited); // we init a boolian array to determine visited nodes
+    assert(visited); // we init a boolean array to determine visited nodes
 
     for (int i = 0; i < g->nVertices; i++)
     {
-        distance[i] = INFINTY; // init all distances as infinty
+        distance[i] = INFINITE; // init all distances as infinity
         visited[i] = false;    // init visited as false
     }
 
     distance[source] = 0;
 
-    // Djikstra Loop
+    // Dijkstra Loop
     for (int i = 0; i < g->nVertices - 1; i++)
     {
         int current = _minDistance(distance, visited, g->nVertices);
@@ -196,14 +196,14 @@ int u_shortest_path(undirected *g, int source, int dist)
 
         visited[current] = true;
 
-        // loop over all edges of the current vertix
+        // loop over all edges of the current vertex
         for (int j = 0; j < g->vertices[current].edgeCount; j++)
         {
             int neighbor = g->vertices[current].edges[j].val;
             int neighbor_weight = g->vertices[current].edges[j].weight;
 
-            // add the new distance if the neighbor isnt visited and if the current distance isnt infinty and if the new distance is less than the current distance
-            if (!visited[neighbor] && distance[current] != INFINTY &&
+            // add the new distance if the neighbor isn't visited and if the current distance isn't infinity and if the new distance is less than the current distance
+            if (!visited[neighbor] && distance[current] != INFINITE &&
                 distance[current] + neighbor_weight < distance[neighbor])
             {
                 distance[neighbor] = distance[current] + neighbor_weight;
@@ -213,12 +213,12 @@ int u_shortest_path(undirected *g, int source, int dist)
     int result = distance[dist];
     free(distance);
     free(visited);
-    return (result == INFINTY) ? -1 : result;
+    return (result == INFINITE) ? -1 : result;
 }
 
 int _minDistance(int *distance, bool *visited, int nVertices)
 {
-    int min = INFINTY, min_index;
+    int min = INFINITE, min_index;
 
     for (int v = 0; v < nVertices; v++)
     {
@@ -236,12 +236,12 @@ directed *init_d_graph(int v)
 {
     directed *graph = (directed *)malloc(1 * sizeof(directed));
     assert(graph);
-    // intialize number of v
+    // initialize number of v
     graph->nVertices = v;
     graph->nEdges = 0;
-    // intialize adjacency list
+    // initialize adjacency list
     graph->vertices = malloc((size_t)v * sizeof(vertex));
-    // intialize each vertix
+    // initialize each vertex
     for (int i = 0; i < v; i++)
     {
         graph->vertices[i].edgeCount = 0;
@@ -290,7 +290,7 @@ void d_dfs(directed *g, int v)
     assert(stack);
 
     bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
-    assert(visited); // we init a boolian array to determine visited nodes
+    assert(visited); // we init a boolean array to determine visited nodes
 
     for (int i = 0; i < g->nVertices; i++)
     {
@@ -330,7 +330,7 @@ void d_bfs(directed *g, int v)
     assert(q);
 
     bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
-    assert(visited); // we init a boolian array to determine visited nodes
+    assert(visited); // we init a boolean array to determine visited nodes
 
     for (int i = 0; i < g->nVertices; i++)
     {
@@ -369,17 +369,17 @@ int d_shortest_path(directed *g, int source, int dist)
     int *distance = malloc((size_t)g->nVertices * sizeof(int));
     assert(distance);
     bool *visited = malloc((size_t)g->nVertices * sizeof(bool));
-    assert(visited); // we init a boolian array to determine visited nodes
+    assert(visited); // we init a boolean array to determine visited nodes
 
     for (int i = 0; i < g->nVertices; i++)
     {
-        distance[i] = INFINTY; // init all distances as infinty
+        distance[i] = INFINITE; // init all distances as infinity
         visited[i] = false;    // init visited as false
     }
 
     distance[source] = 0;
 
-    // Djikstra Loop
+    // Dijkstra Loop
     for (int i = 0; i < g->nVertices - 1; i++)
     {
         int current = _minDistance(distance, visited, g->nVertices);
@@ -390,14 +390,14 @@ int d_shortest_path(directed *g, int source, int dist)
 
         visited[current] = true;
 
-        // loop over all edges of the current vertix
+        // loop over all edges of the current vertex
         for (int j = 0; j < g->vertices[current].edgeCount; j++)
         {
             int neighbor = g->vertices[current].edges[j].val;
             int neighbor_weight = g->vertices[current].edges[j].weight;
 
-            // add the new distance if the neighbor isnt visited and if the current distance isnt infinty and if the new distance is less than the current distance
-            if (!visited[neighbor] && distance[current] != INFINTY &&
+            // add the new distance if the neighbor isn't visited and if the current distance isn't infinity and if the new distance is less than the current distance
+            if (!visited[neighbor] && distance[current] != INFINITE &&
                 distance[current] + neighbor_weight < distance[neighbor])
             {
                 distance[neighbor] = distance[current] + neighbor_weight;
@@ -407,14 +407,14 @@ int d_shortest_path(directed *g, int source, int dist)
     int result = distance[dist];
     free(distance);
     free(visited);
-    return (result == INFINTY) ? -1 : result;
+    return (result == INFINITE) ? -1 : result;
 }
 
 int *d_top_sort(directed *g)
 {
     int N = g->nVertices;
     bool *visited = malloc((size_t)N * sizeof(bool));
-    assert(visited); // we init a boolian array to determine visited nodes
+    assert(visited); // we init a boolean array to determine visited nodes
 
     for (int i = 0; i < N; i++)
     {
@@ -461,7 +461,7 @@ void prim_MST(undirected *g)
     assert(value);
 
     bool *inMST = malloc((size_t)n * sizeof(bool));
-    assert(inMST); // we init a boolian array to determine visited nodes
+    assert(inMST); // we init a boolean array to determine visited nodes
 
     for (int i = 0; i < n; i++)
     {
@@ -523,4 +523,8 @@ void prim_MST(undirected *g)
     free(value);
     free(inMST);
     free_min_heap(q); // Free the heap
+}
+
+bool isCyclic(){
+
 }
