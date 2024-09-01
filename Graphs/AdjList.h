@@ -211,4 +211,16 @@ int d_top_sort_dfs(directed *g, bool *visited, int *ans, int ans_index, int cur)
  */
 void prim_MST(undirected *g);
 
+/**
+ * @brief Detects if there is a cycle in the directed graph.
+ * 
+ * This function uses a depth-first search (DFS) approach with a stack to detect
+ * cycles in a directed graph. It marks vertices as NOT_VISITED, IN_PATH, or FINISHED
+ * to keep track of the traversal state.
+ * 
+ * @param g The directed graph to be checked for cycles.
+ * @return True if a cycle is detected, false otherwise.
+ */
+bool isCyclic(directed *g);
+
 #endif // ADJACENCY_LIST_PROJECT

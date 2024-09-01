@@ -180,7 +180,7 @@ int u_shortest_path(undirected *g, int source, int dist)
     for (int i = 0; i < g->nVertices; i++)
     {
         distance[i] = INFINITE; // init all distances as infinity
-        visited[i] = false;    // init visited as false
+        visited[i] = false;     // init visited as false
     }
 
     distance[source] = 0;
@@ -374,7 +374,7 @@ int d_shortest_path(directed *g, int source, int dist)
     for (int i = 0; i < g->nVertices; i++)
     {
         distance[i] = INFINITE; // init all distances as infinity
-        visited[i] = false;    // init visited as false
+        visited[i] = false;     // init visited as false
     }
 
     distance[source] = 0;
@@ -412,6 +412,10 @@ int d_shortest_path(directed *g, int source, int dist)
 
 int *d_top_sort(directed *g)
 {
+    if (isCyclic(g))
+    {
+        return NULL; // return -1 to indicate that there's a cycle and there's no top_sort
+    }
     int N = g->nVertices;
     bool *visited = malloc((size_t)N * sizeof(bool));
     assert(visited); // we init a boolean array to determine visited nodes
@@ -525,6 +529,79 @@ void prim_MST(undirected *g)
     free_min_heap(q); // Free the heap
 }
 
-bool isCyclic(){
+bool isCyclic(directed *g)
+{
+    Stack *stack = createStack();
+    assert(stack);
 
+    static char NOT_VISITED = 0;
+    static char IN_PATH = 1;
+    static char FINISHED = 2;
+
+    char *status = malloc((size_t)g->nVertices * sizeof(char));
+    assert(status); // we init a flags array to determine visited nodes
+
+    // Initialize all vertices as NOT_VISITED
+    for (int i = 0; i < g->nVertices; i++)
+    {
+        status[i] = 0; // init visited
+    }
+
+    for (int i = 0; i < g->nVertices; i++)
+    {
+        // We have this for loop to ensure that even disconnected components are checked
+        // because this is a directed graph where we cant visit all the nodes from one node
+
+        push(i, stack);
+
+        while (!isEmpty(stack))
+        {
+            int v = peekStack(stack);
+            // why peek not pop? because this vertex is not finished visiting
+            // so we should hold it till all the adjacent paths are discovered fully
+
+            if (status[v] == NOT_VISITED)
+            {
+                status[v] = IN_PATH;
+
+                bool AllAdjVisited = true; // Flag to check if all adjacent vertices are visited
+
+                for (int j = 0; j < g->vertices[v].edgeCount; j++)
+                {
+                    int n = g->vertices[v].edges[j].val;
+
+                    if (status[n] == IN_PATH) // Check if this node was in the current traversal path
+                    {
+                        free(status);
+                        freeStack(stack);
+                        return true;
+                    }
+
+                    if (status[n] == NOT_VISITED) // add not visited nodes to be traversed
+                    {
+                        push(n, stack);
+                        AllAdjVisited = false;
+                    }
+                }
+                if (AllAdjVisited)
+                {
+                    status[v] = FINISHED;
+                    pop(stack); // now we can remove the vertex as all the adj are visited
+                }
+            }
+            else
+            {
+                // If vertex is already in path, finish it
+                if (status[v] == IN_PATH)
+                {
+                    status[v] = FINISHED;
+                }
+                pop(stack); // now we can remove the vertex as all the adj are visited
+            }
+        }
+    }
+    // no cycles were found,So clear allocated memory and return false
+    free(status);
+    freeStack(stack);
+    return false;
 }

@@ -13,12 +13,14 @@ void test_MST();
 void test1_MST();
 void test2_MST();
 void test3_MST();
+void testCyclic();
 
 int main()
 {
     // test_top_order();
     // test_top_order_simple();
-    test_MST();
+    // test_MST();
+    testCyclic();
     return 0;
 }
 void test1()
@@ -184,4 +186,86 @@ void test3_MST()
     // Total cost of MST: 31
 
     free_undirected_graph(g);
+}
+
+void testCyclic()
+{
+    // Test Case 1: Simple Acyclic Graph
+    directed *g1 = init_d_graph(4);
+
+    add_d_edge(g1, 0, 1, WEIGHT);
+    add_d_edge(g1, 1, 2, WEIGHT);
+    add_d_edge(g1, 2, 3, WEIGHT);
+
+    assert(isCyclic(g1) == false);
+    printf("Test 1 passed! :)\n");
+
+    free_directed_graph(g1);
+
+    // Test Case 2: Simple Cyclic Graph
+    directed *g2 = init_d_graph(3);
+
+    add_d_edge(g2, 0, 1, WEIGHT);
+    add_d_edge(g2, 1, 2, WEIGHT);
+    add_d_edge(g2, 2, 0, WEIGHT);
+
+    assert(isCyclic(g2) == true);
+    printf("Test 2 passed! :)\n");
+
+    free_directed_graph(g2);
+
+    // Test Case 3: Disconnected Graph with One Component Having a Cycle
+    directed *g3 = init_d_graph(6);
+
+    add_d_edge(g3, 0, 1, WEIGHT);
+    add_d_edge(g3, 1, 2, WEIGHT);
+    add_d_edge(g3, 3, 4, WEIGHT);
+    add_d_edge(g3, 4, 5, WEIGHT);
+    add_d_edge(g3, 5, 3, WEIGHT);
+
+    assert(isCyclic(g3) == true);
+    printf("Test 3 passed! :)\n");
+
+    free_directed_graph(g3);
+
+    // Test Case 5: Larger Acyclic Graph
+    directed *g4 = init_d_graph(8);
+
+    add_d_edge(g4, 0, 1, WEIGHT);
+    add_d_edge(g4, 0, 2, WEIGHT);
+    add_d_edge(g4, 1, 3, WEIGHT);
+    add_d_edge(g4, 1, 4, WEIGHT);
+    add_d_edge(g4, 2, 5, WEIGHT);
+    add_d_edge(g4, 3, 6, WEIGHT);
+    add_d_edge(g4, 4, 7, WEIGHT);
+
+    assert(isCyclic(g4) == false);
+    printf("Test 4 passed! :)\n");
+
+    free_directed_graph(g4);
+
+    // Test Case 6: Graph with Multiple Cycles
+    directed *g5 = init_d_graph(6);
+
+    add_d_edge(g5, 0, 1, WEIGHT);
+    add_d_edge(g5, 1, 2, WEIGHT);
+    add_d_edge(g5, 2, 0, WEIGHT); // Cycle 1
+    add_d_edge(g5, 3, 4, WEIGHT);
+    add_d_edge(g5, 4, 5, WEIGHT);
+    add_d_edge(g5, 5, 3, WEIGHT); // Cycle 2
+
+    assert(isCyclic(g5) == true);
+    printf("Test 5 passed! :)\n");
+
+    free_directed_graph(g5);
+
+    // Test Case 7: Single Node without Edges
+    directed *g6 = init_d_graph(1);
+
+    assert(isCyclic(g6) == false);
+
+    free_directed_graph(g6);
+    printf("Test 6 passed! :)\n");
+
+    printf("All tests passed successfully!\n");
 }
