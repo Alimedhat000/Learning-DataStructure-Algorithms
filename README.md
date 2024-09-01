@@ -155,7 +155,7 @@ Implementation of both **Directed** and **Undirected Graphs** using adjacency li
 - Prim's Minimum Spanning Tree
 - Topological Sort
 - Cycle Detection
-- Strongly Connected Components (Kosaraju's algorithm)
+- Strongly Connected Components (Tarjans's algorithm)
 
 ## 🧠 Algorithms
 
