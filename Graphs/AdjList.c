@@ -605,3 +605,87 @@ bool isCyclic(directed *g)
     freeStack(stack);
     return false;
 }
+
+int *findSCCs(directed *g)
+{
+    int index = 0;
+    int N = g->nVertices;
+    int UNVISITED = -1;
+
+    int *labels = (int *)malloc((size_t)N * sizeof(int));
+    int *lowLinkValues = (int *)malloc((size_t)N * sizeof(int));
+    bool *onStack = (bool *)malloc((size_t)N * sizeof(bool));
+
+    Stack *stack = createStack();
+
+    for (int i = 0; i < N; i++)
+    {
+        labels[i] = UNVISITED;
+        lowLinkValues[i] = 0;
+        onStack[i] = false;
+    }
+
+    for (int i = 0; i < N; i++)
+    {
+        if (labels[i] == UNVISITED)
+        {
+            push(i, stack);
+            labels[i] = lowLinkValues[i] = index++;
+            onStack[i] = true;
+
+            while (!isEmpty(stack))
+            {
+                int v = peekStack(stack);
+                bool AllAdjVisited = true;
+
+                for (int j = 0; j < g->vertices[v].edgeCount; j++)
+                {
+                    int adj = g->vertices[v].edges[j].val;
+                    if (labels[adj] == UNVISITED)
+                    {
+                        push(adj, stack);
+                        labels[adj] = lowLinkValues[adj] = index++;
+                        onStack[adj] = true;
+                        AllAdjVisited = false;
+                        break; // Start DFS with adj
+                    }
+                    else if (onStack[adj]) // Handling back edges to ensure each node have the lowest `lowLinkValues` possible
+                    {
+                        // Update lowLinkValues based on the adj node
+                        if (lowLinkValues[v] > lowLinkValues[adj])
+                        {
+                            lowLinkValues[v] = lowLinkValues[adj];
+                        }
+                    }
+                }
+
+                if (AllAdjVisited)
+                {
+                    if (labels[v] == lowLinkValues[v]) // v is a root node of SCC
+                    {
+                        int currentSSC = lowLinkValues[v];
+                        while (true)
+                        {
+                            int w = pop(stack);
+                            onStack[w] = false;
+                            lowLinkValues[w] = currentSSC;
+                            if (w == v)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        pop(stack); // Remove v from stack if it is not an SCC root
+                    }
+                }
+            }
+        }
+    }
+
+    freeStack(stack);
+    free(onStack);
+    free(labels);
+    return lowLinkValues;
+}
