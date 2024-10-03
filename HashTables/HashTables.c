@@ -1,17 +1,17 @@
 #include "HashTables.h"
 
-int main()
-{
-    hash_table *table = createHashtable(10);
-    add(table, "Ali", "Medhat");
-    add(table, "Yousef", "Omar");
-    add(table, "Magd", "Maged");
-    add(table, "Ali", "Omar");
-    add(table, "ilA", "Medhat");
-    delete (table, "Yousef");
-    delete (table, "ilA");
-    printTable(table);
-}
+// int main()
+// {
+//     hash_table *table = createHashtable(10);
+//     add(table, "Ali", "Medhat");
+//     add(table, "Yousef", "Omar");
+//     add(table, "Magd", "Maged");
+//     add(table, "Ali", "Omar");
+//     add(table, "ilA", "Medhat");
+//     delete (table, "Yousef");
+//     delete (table, "ilA");
+//     printTable(table);
+// }
 
 hash_table *createHashtable(int size)
 {
