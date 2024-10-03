@@ -94,23 +94,24 @@ node *find(hash_table *table, char *key)
 
 void printTable(hash_table *table)
 {
-    printf("Cell[x]=> key:value\n");
+    printf("============= Cell[x]=> key:value =============\n");
     for (int i = 0; i < table->size; i++)
     {
         if (table->data[i] != NULL)
         {
-            printf("Cell[%d]=> %s:%s", i, table->data[i]->key, table->data[i]->value);
+            printf("Cell[%d] => %s:%s =>", i, table->data[i]->key, table->data[i]->value);
             node *pCur = table->data[i]->pNext;
             while (pCur != NULL)
             {
-                printf(" %s:%s", pCur->key, pCur->value);
+                printf(" %s:%s => ", pCur->key, pCur->value);
                 pCur = pCur->pNext;
             }
             printf("\n");
         }
         else
         {
-            printf("Cell[%d]=>\n", i);
+            // printf("Cell[%d]=>\n", i);
+            i++;
         }
     }
     printf("===================\n");
